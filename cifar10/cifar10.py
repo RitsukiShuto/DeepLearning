@@ -61,8 +61,8 @@ def train_cifar10(train_data, train_label):
     l = L.Linear(3, 2)  # ネットワークを定義
 
     net = Sequential(
-        L.Linear(n_input, n_hidden), F.relu,
-        L.Linear(n_hidden, n_hidden), F.relu,
+        L.Linear(n_input, n_hidden), F.sigmoid,
+        L.Linear(n_hidden, n_hidden), F.sigmoid,
         L.Linear(n_hidden, n_output)
     )
 
@@ -155,8 +155,8 @@ def train_cifar10(train_data, train_label):
 def inferrene_cifar10(test_data, test_label):
     # ニューラルネットを使って推論
     loaded_net = Sequential(
-        L.Linear(n_input, n_hidden), F.relu,
-        L.Linear(n_hidden, n_hidden), F.relu,
+        L.Linear(n_input, n_hidden), F.sigmoid,
+        L.Linear(n_hidden, n_hidden), F.sigmoid,
         L.Linear(n_hidden, n_output)
     )
 
