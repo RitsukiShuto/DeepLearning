@@ -72,7 +72,7 @@ def train_cifar10(train_data, train_label):
     print(optimizer.setup(net))
 
     # ニューラルネットワークを訓練
-    n_epoch = 300        # TODO: 調整 epoch
+    n_epoch = 213        # TODO: 調整 epoch
     n_batchsize = 1024      # TODO: 調整 batchsize
     iteration = 0
 
