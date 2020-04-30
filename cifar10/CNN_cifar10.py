@@ -2,8 +2,15 @@
 # CNN_cifar10
 #
 # ライブラリを読み込み
+import chainer
+import chainer.links as L
+import chainer.functions as F
+from chainer import Sequential
+
 import pickle
 import numpy as np
+import matplotlib.pyplot as plt
+
 # データセットを読み込み
 
 
