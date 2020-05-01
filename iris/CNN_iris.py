@@ -36,7 +36,7 @@ x_train, x_val, t_train, t_val = train_test_split(
 class CNN(chainer.Chain):
     def __init__(self, train=True):
         super(CNN, self).__init__(
-            conv1=L.Convolution2D(),
+            conv1=L.Convolution2D(),    # (入力チャネル, 出力チャネル, フィルタサイズ)
             conv2=L.Convolution2D(),
             l1=L.Linear(),
         )
