@@ -55,3 +55,7 @@ def load_cifar10():
         test_data = train_data / 255.0
 
         return train_data, train_label, test_data, test_label
+
+# 畳み込みニューラルネットワークを定義
+class CNN():
+    
