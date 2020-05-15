@@ -99,3 +99,25 @@ for epoch in range(n_epoch):
 
         # カウントアップ
         iteration += 1
+
+    # 訓練データに対する目的関数の出力と分類精度を集計 => 平均値
+    loss_train = np.mean(loss_list)
+    accuracy_train = np.mean(accuracy_list)
+
+    # エポックごとに検証用データで評価
+    with chainer.using_config('train', False), chainer.using_config('enablebackprop', False):
+        y_val = net(x_val)
+
+    # 目的関数から分類精度を計算
+    loss_val = F.softmax_cross_entropy(y_val, t_val)
+    accuracy_val = F.accuracy(y_val, t_val)
+
+    # 結果を出力
+    print('epoch: {}, iteration: {}, loss(train): {:.4}, loss(valid): {:.4f}'
+          .format(epoch, iteration, loss_train, loss_val.array))
+
+    # ログを保存
+    results_train['loss'].append(loss_train)
+    results_train['accuracy'].append(accuracy_train)
+    results_valid['loss'].append(loss_val.array)
+    results_valid['accuracy'].append(accuracy_val.array)
