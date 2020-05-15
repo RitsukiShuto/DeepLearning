@@ -60,3 +60,42 @@ results_valid = {
     'loss': [],
     'accuracy': []
 }
+
+# 訓練
+for epoch in range(n_epoch):
+    order = np.random.permutation(range(len(x_train)))
+
+    # 各バッチの目的関数と精度を保存
+    loss_list = []
+    accuracy_list = []
+
+    # epoch / i
+    for i in range(0, len(order), n_batchsize):
+        # バッチを準備
+        index = order[i: i + n_batchsize]       # BUG: 原因不明
+        x_train_batch = x_train[index, :]
+        t_train_batch = t_train[index]
+
+        # 予測値を出力
+        y_train_batch = net(x_train_batch)
+
+        # 目的関数から分類精度を計算
+        loss_train_batch = F.softmax_cross_entropy(
+            y_train_batch, t_train_batch
+        )
+        accuracy_train_batch = F.accuracy(
+            y_train_batch, t_train_batch
+        )
+
+        loss_list.append(loss_train_batch.array)
+        accuracy_list.append(accuracy_train_batch.array)
+
+        # 勾配のリセット
+        net.cleargrads()
+        loss_train_batch.backward()
+
+        # パラメータを更新
+        optimizer.update()
+
+        # カウントアップ
+        iteration += 1
