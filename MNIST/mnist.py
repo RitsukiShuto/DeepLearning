@@ -50,3 +50,13 @@ net = Sequential(
 # 目的関数を定義
 optimizer = chainer.optimizers.SGD(lr=0.01)
 print(optimizer.setup(net))
+
+# ログ保存用
+results_train = {
+    'loss': [],
+    'accuracy': []
+}
+results_valid = {
+    'loss': [],
+    'accuracy': []
+}
